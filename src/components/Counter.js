@@ -1,32 +1,49 @@
 import classes from './Counter.module.css';
 import { useSelector,useDispatch } from 'react-redux';
-
+import { counterAction } from '../store/index';
 const Counter = () => {
+  // The useSelector hook is used to access the state from the Redux store, and useDispatch is used to dispatch actions.
   const dispatch=useDispatch();
   const counter=useSelector(state=>state.counter);
+  const show=useSelector(state=>state.showCounter)
 
+  // const incrementHandler=()=>{
+  //   dispatch({type:'increment'})
+  // }
   const incrementHandler=()=>{
-    dispatch({type:'increment'})
+    dispatch(counterAction.increment())
   }
 
+  // const decrementHnadler=()=>{
+  //   dispatch({type:'decrement'})
+  // }
   const decrementHnadler=()=>{
-    dispatch({type:'decrement'})
+    dispatch(counterAction.decrement())
   }
 
+  // const incrementby5Handler=()=>{
+  //   dispatch({type:'incrementby5',amount:5})
+  // }
   const incrementby5Handler=()=>{
-    dispatch({type:'incrementby5'})
+    dispatch(counterAction.increase(5))
   }
 
+  // const decrementby5Hnadler=()=>{
+  //   dispatch({type:'decrementby5',amount:5})
+  // }
   const decrementby5Hnadler=()=>{
-    dispatch({type:'decrementby5'})
+    dispatch(counterAction.decrease(5))
   }
 
-  const toggleCounterHandler = () => {};
+
+  const toggleCounterHandler = () => {
+    dispatch(counterAction.toggleCounter())
+  };
 
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>{counter}</div>
+      {show && <div className={classes.value}>{counter}</div>}
       <div>
         <button onClick={incrementHandler}>Increment</button>
         <button onClick={decrementHnadler}>Decrement</button>
