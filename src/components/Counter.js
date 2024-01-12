@@ -1,11 +1,11 @@
 import classes from './Counter.module.css';
 import { useSelector,useDispatch } from 'react-redux';
-import { counterAction } from '../store/index';
+import { counterAction } from '../store/counter';
 const Counter = () => {
   // The useSelector hook is used to access the state from the Redux store, and useDispatch is used to dispatch actions.
   const dispatch=useDispatch();
-  const counter=useSelector(state=>state.counter);
-  const show=useSelector(state=>state.showCounter)
+  const counter=useSelector(state=>state.counter.counter);
+  const show=useSelector(state=>state.counter.showCounter)
 
   // const incrementHandler=()=>{
   //   dispatch({type:'increment'})
@@ -25,14 +25,14 @@ const Counter = () => {
   //   dispatch({type:'incrementby5',amount:5})
   // }
   const incrementby5Handler=()=>{
-    dispatch(counterAction.increase(5))
+    dispatch(counterAction.increase({ payload: 5 }))
   }
 
   // const decrementby5Hnadler=()=>{
   //   dispatch({type:'decrementby5',amount:5})
   // }
   const decrementby5Hnadler=()=>{
-    dispatch(counterAction.decrease(5))
+    dispatch(counterAction.decrease({ payload: 5 }))
   }
 
 
